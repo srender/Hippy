@@ -52,6 +52,14 @@ export default [
     },
   },
   {
+    path: '/ListView3',
+    name: 'ListView3 组件',
+    component: PAGE_LIST.ListView3,
+    meta: {
+      style: 1,
+    },
+  },
+  {
     path: '/RefreshWrapper',
     name: 'RefreshWrapper 组件',
     component: PAGE_LIST.RefreshWrapper,

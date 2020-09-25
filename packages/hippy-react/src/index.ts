@@ -15,6 +15,7 @@ import View from './components/view';
 import Text from './components/text';
 import Image from './components/image';
 import ListView from './components/list-view';
+import ListView3 from './components/list-view3';
 import RefreshWrapper from './components/refresh-wrapper';
 import Navigator from './components/navigator';
 import ViewPager from './components/view-pager';
@@ -120,6 +121,7 @@ export {
   WebView,
   ImageBackground,
   WebSocket,
+  ListView3
 };
 
 export default HippyReact;

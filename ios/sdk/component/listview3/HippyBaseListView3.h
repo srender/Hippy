@@ -24,17 +24,18 @@
 #import "HippyScrollView.h"
 #import "HippyBridge.h"
 #import "HippyUIManager.h"
-#import "HippyBaseListViewProtocol.h"
-#import "HippyBaseListViewDataSource.h"
+#import "HippyBaseListView3Protocol.h"
+#import "HippyBaseListView3DataSource.h"
 
-@interface HippyBaseListViewCell : UITableViewCell
+@interface HippyBaseListView3Cell : UITableViewCell
 
-@property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, weak) UITableView *tableView3;
 @property (nonatomic, assign) UIView *cellView;
 @property (nonatomic, weak) HippyVirtualCell *node;
+@property (nonatomic , weak) UICollectionView * collectionView;
 @end
 
-@interface HippyBaseListView : UIView <HippyBaseListViewProtocol, HippyScrollableProtocol, UITableViewDelegate, UITableViewDataSource, HippyInvalidating>
+@interface HippyBaseListView3 : UIView <HippyBaseListView3Protocol, HippyScrollableProtocol, UITableViewDelegate, UITableViewDataSource, HippyInvalidating>
 @property (nonatomic, copy) HippyDirectEventBlock initialListReady;
 @property (nonatomic, copy) HippyDirectEventBlock onScrollBeginDrag;
 @property (nonatomic, copy) HippyDirectEventBlock onScroll;
@@ -49,8 +50,8 @@
 @property (nonatomic, assign) BOOL bounces;
 @property (nonatomic, assign) BOOL showScrollIndicator;
 
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong, readonly) HippyBaseListViewDataSource *dataSource;
+@property (nonatomic, strong) UITableView *tableView3;
+@property (nonatomic, strong, readonly) HippyBaseListView3DataSource *dataSource;
 @property (nonatomic, assign) NSTimeInterval scrollEventThrottle;
 - (void)reloadData;
 - (Class)listViewCellClass;
