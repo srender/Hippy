@@ -55,7 +55,7 @@ std::unique_ptr<std::vector<char>> HippyFile::ReadFile(const char* file_path,
 
   if (!file.fail()) {
     file.seekg(0, std::ios::end);
-    int size = file.tellg();
+    int size = (int)file.tellg();
     if (is_auto_fill) {  // Hippy场景
                          // JSC需要末尾补结束符，此处多分配一个字节，避免之后的操作拷贝
       size += 1;

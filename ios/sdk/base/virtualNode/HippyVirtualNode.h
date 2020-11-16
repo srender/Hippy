@@ -26,6 +26,8 @@
 @class HippyVirtualNode;
 @class HippyVirtualList;
 @class HippyVirtualCell;
+@class HippyVirtualCollectionList;
+@class HippyVirtualCollectionCell;
 
 @protocol HippyVirtualListComponentUpdateDelegate
 - (void)virtualListDidUpdated;
@@ -46,6 +48,10 @@
 
 @property (nonatomic, weak) HippyVirtualList *listNode;
 @property (nonatomic, weak) HippyVirtualCell *cellNode;
+
+@property (nonatomic, weak) HippyVirtualCollectionList *collectionViewListNode;
+@property (nonatomic, weak) HippyVirtualCollectionCell *collectionViewCellNode;
+
 @property (nonatomic, copy) NSNumber *rootTag;
 
 - (BOOL)isListSubNode;
@@ -74,6 +80,19 @@ typedef void (^HippyVirtualNodeManagerUIBlock)(HippyUIManager *uiManager, NSDict
 @interface HippyVirtualList: HippyVirtualNode
 @property (nonatomic, assign) BOOL needFlush;
 @end
+
+
+
+@interface HippyVirtualCollectionList : HippyVirtualNode
+@property (nonatomic, assign) BOOL needFlush;
+@end
+
+@interface HippyVirtualCollectionCell : HippyVirtualNode
+@property (nonatomic, copy) NSString *itemViewType;
+@property (nonatomic, assign) BOOL sticky;
+@property (nonatomic, weak) UIView *cell;
+@end
+
 
 @interface UIView (HippyRemoveNode)
 - (void)removeView:(HippyRemoveViewForShadow)removeBlock;

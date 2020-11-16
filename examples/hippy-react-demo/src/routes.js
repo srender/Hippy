@@ -60,6 +60,14 @@ export default [
     },
   },
   {
+    path: '/CollectionList',
+    name: 'CollectionList 组件',
+    component: PAGE_LIST.CollectionList,
+    meta: {
+      style: 1,
+    },
+  },
+  {
     path: '/RefreshWrapper',
     name: 'RefreshWrapper 组件',
     component: PAGE_LIST.RefreshWrapper,

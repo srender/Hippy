@@ -48,10 +48,10 @@
 #import "UIView+Private.h"
 #import "HippyVirtualNode.h"
 #import "HippyBaseListViewProtocol.h"
-#import "HippyBaseListView3Protocol.h"
+#import "HippyBaseCollectionViewProtocol.h"
 #import "HippyMemoryOpt.h"
 @protocol HippyBaseListViewProtocol;
-@protocol HippyBaseListView3Protocol;
+@protocol HippyBaseCollectionViewProtocol;
 
 
 static void HippyTraverseViewNodes(id<HippyComponent> view, void (^block)(id<HippyComponent>))
@@ -1004,13 +1004,15 @@ HIPPY_EXPORT_METHOD(createView:(nonnull NSNumber *)hippyTag
             }
         }
         
-        if ([node isKindOfClass:[HippyVirtualList class]]) {
-            if ([view conformsToProtocol: @protocol(HippyBaseListView3Protocol)]) {
-                id <HippyBaseListView3Protocol> listview3 = (id<HippyBaseListView3Protocol>)view;
-                listview3.node = (HippyVirtualList *)node;
-                [uiManager->_listTags addObject:hippyTag];
+        if([node isKindOfClass:[HippyVirtualCollectionList class]]){
+            if ([view conformsToProtocol: @protocol(HippyBaseCollectionViewProtocol)]) {
+                NSLog(@"===HippyBaseListView4Protocol==:%d",(int)[view conformsToProtocol: @protocol(HippyBaseCollectionViewProtocol)] );
+               id <HippyBaseCollectionViewProtocol> collectionView = (id<HippyBaseCollectionViewProtocol>)view;
+               collectionView.node = (HippyVirtualCollectionList *)node;
+               [uiManager->_listTags addObject:hippyTag];
             }
         }
+        
     }];
     
     [self addVirtulNodeBlock:^(HippyUIManager *uiManager, __unused NSDictionary<NSNumber *,HippyVirtualNode *> *virtualNodeRegistry) {
@@ -1221,7 +1223,8 @@ HIPPY_EXPORT_METHOD(dispatchViewManagerCommand:(nonnull NSNumber *)hippyTag
                 }
                 
                 [uiManager flushListView];
-                [uiManager flushListView3];
+                //[uiManager flushListView3];
+                [uiManager flushCollectionView];
             }
             @catch (NSException *exception) {
                 HippyLogError(@"Exception thrown while executing UI block: %@", exception);
@@ -1273,21 +1276,22 @@ HIPPY_EXPORT_METHOD(dispatchViewManagerCommand:(nonnull NSNumber *)hippyTag
 }
 
 
-- (void)flushListView3
+
+
+- (void)flushCollectionView
 {
     if (_listTags.count != 0) {
         [_listTags enumerateObjectsUsingBlock:^(NSNumber * _Nonnull tag, __unused NSUInteger idx, __unused BOOL * stop) {
-            HippyVirtualList *listNode = (HippyVirtualList *)self->_nodeRegistry[tag];
-            if (listNode.needFlush) {
-                id <HippyBaseListView3Protocol> listView3 = (id <HippyBaseListView3Protocol>)self->_viewRegistry[tag];
-                if([listView3 flush]) {
-                    listNode.needFlush = NO;
+            HippyVirtualCollectionList *collectionViewListNode = (HippyVirtualCollectionList *)self->_nodeRegistry[tag];
+            if (collectionViewListNode.needFlush) {
+                id <HippyBaseCollectionViewProtocol> collectionView = (id <HippyBaseCollectionViewProtocol>)self->_viewRegistry[tag];
+                if([collectionView flush]) {
+                    collectionViewListNode.needFlush = NO;
                 }
             }
         }];
     }
 }
-
 
 - (void)setNeedsLayout
 {

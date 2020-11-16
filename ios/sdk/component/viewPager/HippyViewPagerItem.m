@@ -23,6 +23,6 @@
 #import "HippyViewPagerItem.h"
 #import "UIView+Hippy.h"
 
-@implementation HippyViewPagerItem
+@implementation HippyViewPagerItem 
 
 @end

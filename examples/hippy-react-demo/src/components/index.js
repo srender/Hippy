@@ -12,3 +12,4 @@ export { default as View } from './View';
 export { default as ViewPager } from './ViewPager';
 export { default as WebView } from './WebView';
 export { default as ListView3 } from './ListView3';
+export { default as CollectionList } from './CollectionView';

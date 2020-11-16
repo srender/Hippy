@@ -312,8 +312,73 @@
 {
 	if (!CGSizeEqualToSize(self.frame.size, CGSizeZero) && !CGSizeEqualToSize(self.frame.size, frame.size)) {
 		self.listNode.needFlush = YES;
+        self.collectionViewListNode.needFlush = YES;
 	}
 	[super hippySetFrame: frame];
+}
+
+@end
+
+
+
+
+@implementation HippyVirtualCollectionList
+
+- (BOOL)isListSubNode
+{
+    return NO;
+}
+
+- (void)insertHippySubview:(id<HippyComponent>)subview atIndex:(__unused NSInteger)atIndex
+{
+    self.needFlush = YES;
+    [super insertHippySubview: subview atIndex: atIndex];
+}
+
+- (void)removeHippySubview:(id<HippyComponent>)subview
+{
+    self.needFlush = YES;
+    [super removeHippySubview: subview];
+}
+@end
+
+
+
+@implementation HippyVirtualCollectionCell
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat: @"hippyTag: %@, viewName: %@, props:%@ type: %@ frame:%@", self.hippyTag, self.viewName, self.props, self.itemViewType
+                    , NSStringFromCGRect(self.frame)];
+}
+
+- (instancetype)initWithTag:(NSNumber *)tag
+                                     viewName:(NSString *)viewName
+                                            props:(NSDictionary *)props
+{
+    if (self = [super initWithTag: tag viewName: viewName props: props]) {
+        self.itemViewType = [NSString stringWithFormat: @"%@", props[@"type"]];
+        self.sticky = [props[@"sticky"] boolValue];
+    }
+    return self;
+}
+
+
+- (void)setProps:(NSDictionary *)props
+{
+    [super setProps: props];
+    
+    self.itemViewType = [NSString stringWithFormat: @"%@", props[@"type"]];
+    self.sticky = [props[@"sticky"] boolValue];
+}
+
+- (void)hippySetFrame:(CGRect)frame
+{
+    if (!CGSizeEqualToSize(self.frame.size, CGSizeZero) && !CGSizeEqualToSize(self.frame.size, frame.size)) {
+        self.listNode.needFlush = YES;
+        self.collectionViewListNode.needFlush = YES;
+    }
+    [super hippySetFrame: frame];
 }
 
 @end

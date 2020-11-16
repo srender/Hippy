@@ -41,6 +41,7 @@
 	return self;
 }
 
+
 - (UIView *)cellView
 {
 	return [self.contentView viewWithTag: CELL_TAG];
@@ -125,6 +126,7 @@
 - (void) setPreloadItemNumber:(NSUInteger)preloadItemNumber {
     _preloadItemNumber = MAX(1, preloadItemNumber);
 }
+
 
 - (BOOL)flush
 {
@@ -338,7 +340,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	HippyVirtualCell *newNode = [_dataSource cellForIndexPath: indexPath];
-	NSString *identifier = newNode.itemViewType;
+	NSString *identifier = newNode.itemViewType;                      
 	HippyBaseListViewCell *cell = (HippyBaseListViewCell *)[tableView dequeueReusableCellWithIdentifier: identifier];
 	while (cell && !([[(HippyVirtualCell *)cell.node itemViewType] isEqualToString: newNode.itemViewType])) {
         // 此处cell还在tableView上，将导致泄漏

@@ -1,32 +1,17 @@
-/*!
-* iOS SDK
-*
-* Tencent is pleased to support the open source community by making
-* Hippy available.
-*
-* Copyright (C) 2019 THL A29 Limited, a Tencent company.
-* All rights reserved.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+//
+//  HippyBaseCollectionViewManager.m
+//  HippyDemo
+//
+//  Created by K-slay on 2020/11/15.
+//  Copyright © 2020 tencent. All rights reserved.
+//
 
-#import "HippyBaseListView3Manager.h"
-#import "HippyBaseListView.h"
+#import "HippyBaseCollectionViewManager.h"
+#import "HippyBaseCollectionView.h"
 #import "HippyVirtualNode.h"
+@implementation HippyBaseCollectionViewManager
 
-@implementation HippyBaseListView3Manager
-
-HIPPY_EXPORT_MODULE(ListView3)
+HIPPY_EXPORT_MODULE(CollectionView)
 
 HIPPY_EXPORT_VIEW_PROPERTY(scrollEventThrottle, NSTimeInterval)
 HIPPY_EXPORT_VIEW_PROPERTY(initialListReady, HippyDirectEventBlock);
@@ -45,12 +30,12 @@ HIPPY_EXPORT_VIEW_PROPERTY(scrollEnabled, BOOL)
 
 - (UIView *)view
 {
-    return [[HippyBaseListView alloc] initWithBridge: self.bridge];
+    return [[HippyBaseCollectionView alloc] initWithBridge: self.bridge];
 }
 
 - (HippyVirtualNode *)node:(NSNumber *)tag name:(NSString *)name props:(NSDictionary *)props
 {
-    return [HippyVirtualList createNode: tag viewName: name props: props];
+    return [HippyVirtualCollectionList createNode: tag viewName: name props: props];
 }
 
 HIPPY_EXPORT_METHOD(scrollToIndex:(nonnull NSNumber *)hippyTag
@@ -60,9 +45,9 @@ HIPPY_EXPORT_METHOD(scrollToIndex:(nonnull NSNumber *)hippyTag
 {
     [self.bridge.uiManager addUIBlock:
      ^(__unused HippyUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry){
-         HippyBaseListView *view = (HippyBaseListView *)viewRegistry[hippyTag];
+         HippyBaseCollectionView *view = (HippyBaseCollectionView *)viewRegistry[hippyTag];
          if (view == nil) return ;
-         if (![view isKindOfClass:[HippyBaseListView class]]) {
+         if (![view isKindOfClass:[HippyBaseCollectionView class]]) {
              HippyLogError(@"Invalid view returned from registry, expecting HippyBaseListView, got: %@", view);
          }
          [view scrollToIndex: yIndex.integerValue animated: [animation boolValue]];
@@ -76,9 +61,9 @@ HIPPY_EXPORT_METHOD(scrollToContentOffset:(nonnull NSNumber *)hippyTag
 {
     [self.bridge.uiManager addUIBlock:
      ^(__unused HippyUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry){
-         HippyBaseListView *view = (HippyBaseListView *)viewRegistry[hippyTag];
+         HippyBaseCollectionView *view = (HippyBaseCollectionView *)viewRegistry[hippyTag];
          if (view == nil) return ;
-         if (![view isKindOfClass:[HippyBaseListView class]]) {
+         if (![view isKindOfClass:[HippyBaseCollectionView class]]) {
              HippyLogError(@"Invalid view returned from registry, expecting HippyBaseListView, got: %@", view);
          }
          [view scrollToContentOffset:CGPointMake([x floatValue], [y floatValue]) animated: [animation boolValue]];
