@@ -52,14 +52,6 @@ export default [
     },
   },
   {
-    path: '/ListView3',
-    name: 'ListView3 组件',
-    component: PAGE_LIST.ListView3,
-    meta: {
-      style: 1,
-    },
-  },
-  {
     path: '/CollectionList',
     name: 'CollectionList 组件',
     component: PAGE_LIST.CollectionList,
