@@ -26,18 +26,15 @@ const mockDataArray = [
 const styles = StyleSheet.create({
   container: {
     width: 375,
-    height:60,
-    backgroundColor: '#ffffff',
+    height:40,
   },
   container2:{
     width: 375,
-    height:60,
-    backgroundColor: '#fff222',
+    height:40
   },
   container3:{
     width: 375,
-    height:60,
-    backgroundColor: '#fff888',
+    height:40
   },
   itemContainer: {
     padding: 12,

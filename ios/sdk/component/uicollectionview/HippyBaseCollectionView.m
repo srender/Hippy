@@ -66,9 +66,6 @@ static float AD_height = 150;//广告栏高度
 {
     if (self = [super initWithFrame: CGRectZero])
     {
-       
-        NSLog(@"===========HippyBaseCollectionView initWithBridge===========");
-       
         _bridge = bridge;
         _scrollListeners = [NSHashTable weakObjectsHashTable];
         _dataSource = [HippyBaseCollectionViewDataSource new];
@@ -112,9 +109,14 @@ static float AD_height = 150;//广告栏高度
         //_collectionView.alwaysBounceHorizontal=YES;
         //flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    
+      
+        flowLayout.minimumInteritemSpacing = 0;
+        flowLayout.minimumLineSpacing = 0;
         
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, fDeviceWidth, fDeviceHeight) collectionViewLayout:flowLayout];
-        
+        //_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+      
         //设置代理
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -122,6 +124,15 @@ static float AD_height = 150;//广告栏高度
         _collectionView.backgroundColor = [UIColor clearColor];
         //自适应大小
         _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        //self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        
+        
+        //竖直方向滚动
+        _collectionView.alwaysBounceVertical=YES;
+        
+        
+        //水平方向滑动
+        //_collectionView.alwaysBounceHorizontal = YES;
         
         [_collectionView registerClass:[HippyBaseCollectionViewCell class] forCellWithReuseIdentifier:@"HippyBaseCollectionViewCell"];
         
@@ -243,4 +254,43 @@ static float AD_height = 150;//广告栏高度
 {
   return _manualScroll;
 }
+
+
+
+#pragma mark -Scrollable
+
+- (void)addScrollListener:(NSObject<UIScrollViewDelegate> *)scrollListener
+{
+    [_scrollListeners addObject: scrollListener];
+}
+
+- (void)removeScrollListener:(NSObject<UIScrollViewDelegate> *)scrollListener
+{
+    [_scrollListeners removeObject: scrollListener];
+}
+
+- (UIScrollView *)realScrollView
+{
+    return self.collectionView;
+}
+
+- (CGSize)contentSize
+{
+    return self.collectionView.contentSize;
+}
+
+- (NSHashTable *)scrollListeners
+{
+    return _scrollListeners;
+}
+
+
+- (void)scrollToContentOffset:(CGPoint)offset animated:(BOOL)animated
+{
+    [self.collectionView setContentOffset: offset animated: animated];
+}
+
+
 @end
+
+

@@ -1223,7 +1223,6 @@ HIPPY_EXPORT_METHOD(dispatchViewManagerCommand:(nonnull NSNumber *)hippyTag
                 }
                 
                 [uiManager flushListView];
-                //[uiManager flushListView3];
                 [uiManager flushCollectionView];
             }
             @catch (NSException *exception) {
