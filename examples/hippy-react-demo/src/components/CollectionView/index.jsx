@@ -12,32 +12,38 @@ const mockDataArray = [
   { style: 2 },
   { style: 5 },
   { style: 1 },
-  { style: 5 },
-  { style: 5 },
-  { style: 5 },
-  { style: 5 },
-  { style: 5 },
-  { style: 5 },
-  { style: 5 },
-  { style: 5 },
-  { style: 5 },
+  { style: 2 },
+  { style: 1 },
+  // { style: 5 },
+  // { style: 5 },
+  // { style: 5 },
+  // { style: 5 },
+  // { style: 5 },
+  // { style: 5 },
+  // { style: 5 },
+  // { style: 5 },
+  // { style: 5 },
 ];
 
 const styles = StyleSheet.create({
-  container: {
-    width: 375,
+  listviewContainer: {
+    width:200,
     height:40,
   },
+  normalContainer:{
+    width:200,
+    height:40
+  },
   container2:{
-    width: 375,
+    width:  200,
     height:40
   },
   container3:{
-    width: 375,
+    width: 100,
     height:40
   },
   itemContainer: {
-    padding: 12,
+    padding: 24,
   },
   separatorLine: {
     marginLeft: 12,
@@ -71,7 +77,7 @@ function Style2({ index }) {
 
 function Style5({ index }) {
   return (
-    <View style={styles.container}>
+    <View style={styles.container3}>
       <Text numberOfLines={1}>{ `${index}: Style 5 UI` }</Text>
     </View>
   );
@@ -143,7 +149,7 @@ export default class CollectionList extends React.Component {
         // pass
     }
     return (
-      <View style={styles.container}>
+      <View style={styles.normalContainer}>
         <View style={styles.itemContainer}>
           {styleUI}
         </View>
@@ -178,7 +184,7 @@ export default class CollectionList extends React.Component {
 
     return (
       <CollectionView
-        style={{ flexDirection: 'column' , backgroundColor: '#ffffff' }}
+        style={{ flexDirection: 'row' , backgroundColor: '#ffffff' }}
         numberOfSection={dataSource.length}
         renderRow={this.getRenderRow}
         onEndReached={this.onEndReached}
