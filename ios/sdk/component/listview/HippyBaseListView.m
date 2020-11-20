@@ -182,6 +182,7 @@
   _tableView.frame = self.bounds;
 }
 
+
 - (void)insertHippySubview:(UIView *)subview atIndex:(NSInteger)atIndex
 {
     if ([subview isKindOfClass:[HippyHeaderRefresh class]]) {
@@ -202,6 +203,10 @@
         _footerRefreshView.frame = [self.node.subNodes[atIndex] frame];
     }
 }
+
+
+
+
 
 #pragma mark -Scrollable
 
@@ -413,7 +418,7 @@
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
-	if (self.onMomentumScrollBegin) {
+    if (self.onMomentumScrollBegin) {
 		self.onMomentumScrollBegin([self scrollBodyData]);
 	}
     for (NSObject<UIScrollViewDelegate> *scrollViewListener in _scrollListeners) {
@@ -439,12 +444,12 @@
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
-  if (velocity.y == 0 && velocity.x == 0)
-  {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      self->_manualScroll = NO;
-    });
-  }
+      if (velocity.y == 0 && velocity.x == 0)
+      {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+          self->_manualScroll = NO;
+        });
+      }
 	
 	if (self.onScrollEndDrag) {
 		self.onScrollEndDrag([self scrollBodyData]);

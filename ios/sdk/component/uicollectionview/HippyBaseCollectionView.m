@@ -114,9 +114,11 @@ static float AD_height = 150;//广告栏高度
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.minimumLineSpacing = 0;
         
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 400, 80) collectionViewLayout:flowLayout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 1200, 80) collectionViewLayout:flowLayout];
         //_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
-      
+        
+        
+        [self addSubview:_collectionView];
         //设置代理
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -129,15 +131,15 @@ static float AD_height = 150;//广告栏高度
         
         //竖直方向滚动
         //_collectionView.alwaysBounceVertical=YES;
-            
+        
+        //水平指示器
+        _collectionView.showsHorizontalScrollIndicator = NO;
 
         //水平方向滑动
         _collectionView.alwaysBounceHorizontal = YES;
         
         [_collectionView registerClass:[HippyBaseCollectionViewCell class] forCellWithReuseIdentifier:@"HippyBaseCollectionViewCell"];
         
-        
-        [self addSubview:_collectionView];
     }
 }
 
@@ -148,7 +150,7 @@ static float AD_height = 150;//广告栏高度
     return [_dataSource numberOfCellForSection: section];
 }
 
-//实现动态 cell
+//实现动态 cell 每个item 大小
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -158,6 +160,11 @@ static float AD_height = 150;//广告栏高度
     return cellSize;
 }
 
+
+
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(0, 5, 0, 0);
+}
 
 
 #pragma mark 每个UICollectionView展示的内容
@@ -196,10 +203,10 @@ static float AD_height = 150;//广告栏高度
             cell.cellView = cellView;
         }
     }
-//    cell.node.cell = nil;
-//
-//    newNode.cell = cell;
-//    cell.node = newNode;
+    //    cell.node.cell = nil;
+    //
+    //    newNode.cell = cell;
+    //    cell.node = newNode;
     
     //cell.backgroundColor = [UIColor blueColor];
     return cell;
@@ -331,6 +338,10 @@ static float AD_height = 150;//广告栏高度
 
 #pragma mark - Scroll
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"%ld",indexPath.row);
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     NSTimeInterval now = CACurrentMediaTime();
@@ -385,6 +396,8 @@ static float AD_height = 150;//广告栏高度
         }
     }
 }
+
+
 
 
 

@@ -204,7 +204,7 @@ HIPPY_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     _contentView.backgroundColor = backgroundColor;
 }
 
-- (UIViewController *)hippyViewController
+- (UITableViewController *)hippyViewController
 {
     return _hippyViewController ?: [super hippyViewController];
 }
