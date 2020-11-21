@@ -3,7 +3,8 @@ import {
   View,
   StyleSheet,
   Text,
-  Dimensions
+  Dimensions,
+  Image
 } from '@hippy/react';
 import CollectionView from "./list";
 const screenWidth = Dimensions.get('window').width;
@@ -67,7 +68,7 @@ function Style1({ index }) {
 function Style2({ index }) {
   return (
     <View style={styles.container3}>
-      <Text numberOfLines={1}>{`${index}: Style 2 UI`}</Text>
+      <Image style={styles.image} source={{ uri: "https://y.qq.com/music/common/upload/t_cm3_photo_publish/3250648.png" }} />
     </View>
   );
 }

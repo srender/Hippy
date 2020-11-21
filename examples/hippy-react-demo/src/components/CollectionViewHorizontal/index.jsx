@@ -3,7 +3,8 @@ import {
   View,
   StyleSheet,
   Text,
-  Dimensions
+  Dimensions,
+  Image
 } from '@hippy/react';
 import CollectionView from "./list";
 const screenWidth = Dimensions.get('window').width;
@@ -38,12 +39,14 @@ const styles = StyleSheet.create({
   },
   normalContainer: {
     width:  screenWidth / 3,
-    height: 40
+    height: 80
   },
   container2: {
     width:  screenWidth / 3,
     height: 40,
-    backgroundColor:"#888999"
+    backgroundColor:"#888999",
+    justifyContent:"center",
+    alignItems:"center"
   },
   container3: {
     width:  screenWidth / 3,
@@ -63,6 +66,10 @@ const styles = StyleSheet.create({
     color: '#aaaaaa',
     alignSelf: 'center',
   },
+  image:{
+    width:screenWidth / 3,
+    height: 40
+  }
 });
 
 
@@ -77,8 +84,8 @@ function Style1({ index }) {
 function Style2({ index }) {
   return (
     <View style={styles.container3}>
-      <Text numberOfLines={1}>{`${index}: Style 2 UI`}</Text>
-    </View>
+    <Image style={styles.image} source={{ uri: "https://y.qq.com/music/common/upload/t_cm3_photo_publish/3250648.png" }} />
+  </View>
   );
 }
 
