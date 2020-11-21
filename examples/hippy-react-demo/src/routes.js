@@ -60,6 +60,14 @@ export default [
     },
   },
   {
+    path: '/CollectionViewHorizontal',
+    name: 'CollectionViewHorizontal',
+    component: PAGE_LIST.CollectionViewHorizontal,
+    meta: {
+      style: 1,
+    },
+  },
+  {
     path: '/RefreshWrapper',
     name: 'RefreshWrapper 组件',
     component: PAGE_LIST.RefreshWrapper,

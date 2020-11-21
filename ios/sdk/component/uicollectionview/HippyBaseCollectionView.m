@@ -103,13 +103,19 @@ static float AD_height = 150;//广告栏高度
             1、UICollectionViewScrollDirectionHorizontal  水平滑动
             2、UICollectionViewScrollDirectionVertical  竖直滑动
             */
+        
+        
+        //搭配alwaysBounceVertical
         //flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        
+        
+         //搭配alwaysBounceHorizontal
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.minimumLineSpacing = 0;
         
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 1600, 480) collectionViewLayout:flowLayout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, fDeviceWidth, fDeviceHeight) collectionViewLayout:flowLayout];
         //_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         
         [self addSubview:_collectionView];
@@ -123,7 +129,7 @@ static float AD_height = 150;//广告栏高度
         //self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         //水平指示器
-        //_collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.showsHorizontalScrollIndicator = NO;
 
         //水平方向滑动
         _collectionView.alwaysBounceHorizontal = YES;
@@ -149,7 +155,7 @@ static float AD_height = 150;//广告栏高度
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellSize = CGSizeMake(120, 80);
+    CGSize cellSize = CGSizeMake(fDeviceWidth / 3, 40);
 
     return cellSize;
 }

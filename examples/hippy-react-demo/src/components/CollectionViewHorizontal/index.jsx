@@ -33,19 +33,19 @@ const mockDataArray = [
 
 const styles = StyleSheet.create({
   listviewContainer: {
-    width: screenWidth,
+    width: screenWidth / 3,
     height: 40,
   },
   normalContainer: {
-    width: screenWidth,
+    width:  screenWidth / 3,
     height: 40
   },
   container2: {
-    width: screenWidth,
+    width:  screenWidth / 3,
     height: 40
   },
   container3: {
-    width: screenWidth,
+    width:  screenWidth / 3,
     height: 40
   },
   itemContainer: {
@@ -89,7 +89,7 @@ function Style5({ index }) {
   );
 }
 
-export default class CollectionList extends React.Component {
+export default class CollectionViewHorizontal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -185,7 +185,7 @@ export default class CollectionList extends React.Component {
 
     return (
       <CollectionView
-        style={{ flexDirection: 'column', backgroundColor: '#ffffff' }}
+        style={{ flexDirection: 'row', backgroundColor: '#ffffff' }}
         numberOfSection={dataSource.length}
         initialContentOffset={0}
         scrollEnabled={true}

@@ -177,6 +177,7 @@
 	}
 }
 
+
 - (void) hippySetFrame:(CGRect)frame {
   [super hippySetFrame:frame];
   _tableView.frame = self.bounds;
