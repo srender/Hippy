@@ -15,8 +15,8 @@ const mockDataArray = [
   { style: 2 },
   { style: 1 },
   { style: 1 },
-  { style: 2 },
-  { style: 1 },
+  // { style: 2 },
+  // { style: 1 },
   // { style: 5 },
   // { style: 5 },
   // { style: 5 },
@@ -189,6 +189,8 @@ export default class CollectionList extends React.Component {
       <CollectionView
         style={{ flexDirection: 'row' , backgroundColor: '#ffffff' }}
         numberOfSection={dataSource.length}
+        initialContentOffset={0}
+        scrollEnabled={true}
         renderRow={this.getRenderRow}
         onEndReached={this.onEndReached}
         getRowType={this.getRowType}

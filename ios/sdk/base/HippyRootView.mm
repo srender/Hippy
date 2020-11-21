@@ -209,6 +209,7 @@ HIPPY_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     return _hippyViewController ?: [super hippyViewController];
 }
 
+
 - (BOOL)canBecomeFirstResponder
 {
     return YES;

@@ -94,7 +94,6 @@ static float AD_height = 150;//广告栏高度
 }
 
 
-
 - (void)initCollectionView
 {
     if (_collectionView == nil) {
@@ -104,19 +103,14 @@ static float AD_height = 150;//广告栏高度
             1、UICollectionViewScrollDirectionHorizontal  水平滑动
             2、UICollectionViewScrollDirectionVertical  竖直滑动
             */
-        //flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        //flowLayout.headerReferenceSize = CGSizeMake(fDeviceWidth, AD_height+10);//头部大小
-        //_collectionView.alwaysBounceHorizontal=YES;
-        //客户端的flow itemSize决定
-        //flowLayout.itemSize = CGSizeMake(130, 80);
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        //flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        //flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.minimumLineSpacing = 0;
         
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 1200, 80) collectionViewLayout:flowLayout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, 1600, 480) collectionViewLayout:flowLayout];
         //_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
-        
         
         [self addSubview:_collectionView];
         //设置代理
@@ -128,15 +122,15 @@ static float AD_height = 150;//广告栏高度
         _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         //self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
-        
-        //竖直方向滚动
-        //_collectionView.alwaysBounceVertical=YES;
-        
         //水平指示器
-        _collectionView.showsHorizontalScrollIndicator = NO;
+        //_collectionView.showsHorizontalScrollIndicator = NO;
 
         //水平方向滑动
         _collectionView.alwaysBounceHorizontal = YES;
+        
+        
+        //竖直方向滚动
+        //_collectionView.alwaysBounceVertical=YES;
         
         [_collectionView registerClass:[HippyBaseCollectionViewCell class] forCellWithReuseIdentifier:@"HippyBaseCollectionViewCell"];
         
@@ -150,7 +144,7 @@ static float AD_height = 150;//广告栏高度
     return [_dataSource numberOfCellForSection: section];
 }
 
-//实现动态 cell 每个item 大小
+//实现动态 cell 每个item 大小 客户端的flow itemSize决定
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -252,11 +246,11 @@ static float AD_height = 150;//广告栏高度
     [_dataSource setDataSource:(NSArray <HippyVirtualCollectionCell *> *)_subNodes];
     [_collectionView reloadData];
     
-//    if (self.initialContentOffset) {
-//        [_collectionView setContentOffset:CGPointMake(0, self.initialContentOffset) animated:NO];
-//        self.initialContentOffset = 0;
-//    }
-//
+    if (self.initialContentOffset) {
+        [_collectionView setContentOffset:CGPointMake(0, self.initialContentOffset) animated:NO];
+        self.initialContentOffset = 0;
+    }
+
     
     if (!_isInitialListReady) {
         _isInitialListReady = YES;
@@ -265,6 +259,15 @@ static float AD_height = 150;//广告栏高度
         }
     }
 }
+
+
+
+- (void) hippySetFrame:(CGRect)frame {
+  [super hippySetFrame:frame];
+  _collectionView.frame = self.bounds;
+}
+
+
 
 
 - (BOOL)isManualScrolling
@@ -304,6 +307,12 @@ static float AD_height = 150;//广告栏高度
 
 #pragma mark -Scrollable
 
+- (void)setScrollEnabled:(BOOL)value
+{
+    [_collectionView setScrollEnabled:value];
+}
+
+
 - (void)addScrollListener:(NSObject<UIScrollViewDelegate> *)scrollListener
 {
     [_scrollListeners addObject: scrollListener];
@@ -322,6 +331,8 @@ static float AD_height = 150;//广告栏高度
 - (CGSize)contentSize
 {
     return self.collectionView.contentSize;
+    // CGSizeMake(2000, 80);
+    // self.collectionView.contentSize;
 }
 
 - (NSHashTable *)scrollListeners
