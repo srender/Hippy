@@ -27,6 +27,7 @@ HIPPY_EXPORT_VIEW_PROPERTY(bounces, BOOL)
 HIPPY_EXPORT_VIEW_PROPERTY(initialContentOffset, CGFloat)
 HIPPY_EXPORT_VIEW_PROPERTY(showScrollIndicator, BOOL)
 HIPPY_EXPORT_VIEW_PROPERTY(scrollEnabled, BOOL)
+HIPPY_EXPORT_VIEW_PROPERTY(listScrollDirection, NSString)
 
 - (UIView *)view
 {

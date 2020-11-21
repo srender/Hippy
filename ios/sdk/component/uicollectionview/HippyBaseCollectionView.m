@@ -58,6 +58,7 @@ static float AD_height = 150;//广告栏高度
     NSArray<HippyVirtualNode *> *_subNodes;
     HippyHeaderRefresh *_headerRefreshView;
     HippyFooterRefresh *_footerRefreshView;
+    
 }
 
 @synthesize node = _node;
@@ -102,15 +103,15 @@ static float AD_height = 150;//广告栏高度
         /*
             1、UICollectionViewScrollDirectionHorizontal  水平滑动
             2、UICollectionViewScrollDirectionVertical  竖直滑动
-            */
+        */
         
         
         //搭配alwaysBounceVertical
-        //flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         
         
-         //搭配alwaysBounceHorizontal
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        // 搭配alwaysBounceHorizontal
+        //flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.minimumLineSpacing = 0;
@@ -155,21 +156,22 @@ static float AD_height = 150;//广告栏高度
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellSize = CGSizeMake(fDeviceWidth / 3, 40);
-
-    return cellSize;
+    
+    HippyVirtualCollectionCell *node = (HippyVirtualCollectionCell *)[self.node.subNodes objectAtIndex:indexPath.row];
+    return node.frame.size;
 }
 
 
 
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, 5, 0, 0);
-}
+//-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+//    return UIEdgeInsetsMake(0, 5, 0, 0);
+//}
 
 
 #pragma mark 每个UICollectionView展示的内容
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"fuck indexpath %d", indexPath.row);
     HippyVirtualCollectionCell *newNode = [_dataSource cellForIndexPath: indexPath];
     //NSString *identifier = newNode.itemViewType;
     static NSString *cellIdentifier = @"HippyBaseCollectionViewCell";
@@ -216,9 +218,15 @@ static float AD_height = 150;//广告栏高度
 - (BOOL)flush
 {
     NSNumber *number = self.node.props[@"numberOfSection"];
+    NSString *direction = self.node.props[@"listScrollDirection"];
+    
     if ([number isEqual:[NSNull null]]) {
            return NO;
     }
+    
+//    if(direction === "vertical"){
+//        //flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+//    }
     
     NSUInteger numberOfSection = [number integerValue];
     NSLog(@"====numberOfSection===:%d",(int)numberOfSection);
@@ -232,6 +240,9 @@ static float AD_height = 150;//广告栏高度
             return NO;
         }];
     });
+    
+    //设置方向 可滑动大小
+    
     
     _subNodes = [self.node.subNodes filteredArrayUsingPredicate:predicate];
     

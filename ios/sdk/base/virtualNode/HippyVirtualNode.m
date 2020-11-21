@@ -116,8 +116,9 @@
 
 - (BOOL)isListSubNode
 {
-	return [self listNode] != nil;
+	return [self listNode] != nil || [self collectionViewListNode] != nil;
 }
+
 
 - (HippyVirtualNode *)cellNode
 {
@@ -128,7 +129,9 @@
 	HippyVirtualNode *cell = self;
 	if ([cell isKindOfClass: [HippyVirtualCell class]]) {
 		_cellNode = (HippyVirtualCell *)cell;
-	} else {
+    } else if([cell isKindOfClass: [HippyVirtualCollectionCell class]]){
+        _cellNode = (HippyVirtualCollectionCell *)cell;
+    }else{
 		HippyVirtualNode *parent = (HippyVirtualNode *)[cell parent];
 		_cellNode = [parent cellNode];
 	}
@@ -152,6 +155,21 @@
 	
 	return _listNode;
 }
+
+- (HippyVirtualCollectionList *)collectionViewListNode{
+    if(_collectionViewListNode != nil){
+        return _collectionViewListNode;
+    }
+    HippyVirtualNode *list = self;
+    if ([list isKindOfClass: [HippyVirtualCollectionList class]]) {
+        _collectionViewListNode = (HippyVirtualCollectionList *)list;
+    } else {
+        HippyVirtualNode *parent = (HippyVirtualNode *)[list parent];
+        _collectionViewListNode = [parent collectionViewListNode];
+    }
+    return _collectionViewListNode;
+}
+
 
 - (UIView *)createView:(HippyCreateViewForShadow)createBlock insertChildrens:(HippyInsertViewForShadow)insertChildrens
 {

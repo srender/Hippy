@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
   },
   container2: {
     width:  screenWidth / 3,
-    height: 40
+    height: 40,
+    backgroundColor:"#888999"
   },
   container3: {
     width:  screenWidth / 3,
@@ -189,6 +190,7 @@ export default class CollectionViewHorizontal extends React.Component {
         numberOfSection={dataSource.length}
         initialContentOffset={0}
         scrollEnabled={true}
+        listScrollDirection={"horizontal"}
         renderRow={this.getRenderRow}
         onEndReached={this.onEndReached}
         getRowType={this.getRowType}

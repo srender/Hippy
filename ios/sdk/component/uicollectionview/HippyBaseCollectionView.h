@@ -41,6 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong, readonly) HippyBaseCollectionViewDataSource *dataSource;
 @property (nonatomic, assign) NSTimeInterval scrollEventThrottle;
+@property (nonatomic, assign) UICollectionViewFlowLayout *flowLayout;
+
+
 - (void)reloadData;
 - (Class)listViewCellClass;
 - (instancetype)initWithBridge:(HippyBridge *)bridge;

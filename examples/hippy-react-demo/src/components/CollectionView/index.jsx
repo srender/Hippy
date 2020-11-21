@@ -29,6 +29,16 @@ const mockDataArray = [
   { style: 5 },
   { style: 5 },
   { style: 5 },
+  { style: 1 },
+  { style: 5 },
+  { style: 5 },
+  { style: 5 },
+  { style: 5 },
+  { style: 5 },
+  { style: 5 },
+  { style: 5 },
+  { style: 5 },
+  { style: 5 },
 ];
 
 const styles = StyleSheet.create({
@@ -189,6 +199,7 @@ export default class CollectionList extends React.Component {
         numberOfSection={dataSource.length}
         initialContentOffset={0}
         scrollEnabled={true}
+        listScrollDirection={"vertical"}
         renderRow={this.getRenderRow}
         onEndReached={this.onEndReached}
         getRowType={this.getRowType}
