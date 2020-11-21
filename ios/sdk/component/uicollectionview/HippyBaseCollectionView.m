@@ -107,11 +107,11 @@ static float AD_height = 150;//广告栏高度
         
         
         //搭配alwaysBounceVertical
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        //flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         
         
         // 搭配alwaysBounceHorizontal
-        //flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.minimumLineSpacing = 0;
@@ -218,7 +218,7 @@ static float AD_height = 150;//广告栏高度
 - (BOOL)flush
 {
     NSNumber *number = self.node.props[@"numberOfSection"];
-    NSString *direction = self.node.props[@"listScrollDirection"];
+    //NSString *direction = self.node.props[@"listScrollDirection"];
     
     if ([number isEqual:[NSNull null]]) {
            return NO;
