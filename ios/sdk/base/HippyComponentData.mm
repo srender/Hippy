@@ -132,6 +132,7 @@ HIPPY_NOT_IMPLEMENTED(- (instancetype)init)
 {
     self.manager.props = props;
     UIView *view = [self.manager view];
+    view.props = props;
     view.hippyTag = tag;
     view.rootTag = props[@"rootTag"];
     view.multipleTouchEnabled = YES;

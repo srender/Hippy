@@ -49,6 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithBridge:(HippyBridge *)bridge;
 - (void)scrollToContentOffset:(CGPoint)point animated:(BOOL)animated;
 - (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated;
+//- (void)setListScrollDirection:(NSString)direction
 @end
 
 NS_ASSUME_NONNULL_END

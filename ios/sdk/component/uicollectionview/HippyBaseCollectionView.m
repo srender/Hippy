@@ -73,6 +73,7 @@ static float AD_height = 150;//广告栏高度
         _isInitialListReady = NO;
         _preNumberOfSection = 2;
         _preloadItemNumber = 10;
+        
         [self initCollectionView];
     }
     return self;
@@ -104,14 +105,14 @@ static float AD_height = 150;//广告栏高度
             1、UICollectionViewScrollDirectionHorizontal  水平滑动
             2、UICollectionViewScrollDirectionVertical  竖直滑动
         */
-        
-        
-        //搭配alwaysBounceVertical
-        //flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        
-        
-        // 搭配alwaysBounceHorizontal
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//        NSString *direction = self.node.props[@"listScrollDirection"];
+//        if([ direction isEqualToString:@"horizontal"]){
+            // 搭配alwaysBounceHorizontal
+            flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//        }else{
+//            //搭配alwaysBounceVertical
+//            flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+//        }
         
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.minimumLineSpacing = 0;
@@ -131,13 +132,17 @@ static float AD_height = 150;//广告栏高度
         
         //水平指示器
         _collectionView.showsHorizontalScrollIndicator = NO;
-
-        //水平方向滑动
-        _collectionView.alwaysBounceHorizontal = YES;
+//
+//        if([ direction isEqualToString:@"horizontal"]){
+//        //水平方向滑动
+            _collectionView.alwaysBounceHorizontal = YES;
+//        }else{
+//            //竖直方向滚动
+//            _collectionView.alwaysBounceVertical=YES;
+//        }
+//
         
-        
-        //竖直方向滚动
-        //_collectionView.alwaysBounceVertical=YES;
+       
         
         [_collectionView registerClass:[HippyBaseCollectionViewCell class] forCellWithReuseIdentifier:@"HippyBaseCollectionViewCell"];
         
@@ -217,6 +222,10 @@ static float AD_height = 150;//广告栏高度
 
 - (BOOL)flush
 {
+    
+    //[self initCollectionView];
+    
+    
     NSNumber *number = self.node.props[@"numberOfSection"];
     //NSString *direction = self.node.props[@"listScrollDirection"];
     
@@ -256,15 +265,22 @@ static float AD_height = 150;//广告栏高度
     return NO;
 }
 
-
+//- (UICollectionView *)collectionView
+//{
+//    if (!_collectionView)
+//    {
+//        [self initCollectionView];
+//    }
+//    return _collectionView;
+//}
 
 - (void)reloadData
 {
     [_dataSource setDataSource:(NSArray <HippyVirtualCollectionCell *> *)_subNodes];
-    [_collectionView reloadData];
+    [self.collectionView reloadData];
     
     if (self.initialContentOffset) {
-        [_collectionView setContentOffset:CGPointMake(0, self.initialContentOffset) animated:NO];
+        [self.collectionView setContentOffset:CGPointMake(0, self.initialContentOffset) animated:NO];
         self.initialContentOffset = 0;
     }
 
@@ -281,7 +297,7 @@ static float AD_height = 150;//广告栏高度
 
 - (void) hippySetFrame:(CGRect)frame {
   [super hippySetFrame:frame];
-  _collectionView.frame = self.bounds;
+  self.collectionView.frame = self.bounds;
 }
 
 
@@ -327,6 +343,12 @@ static float AD_height = 150;//广告栏高度
 - (void)setScrollEnabled:(BOOL)value
 {
     [_collectionView setScrollEnabled:value];
+}
+
+- (void)setListScrollDirection:(NSString *)direction
+{
+    // krisye
+    NSLog(@"%@", direction);
 }
 
 
@@ -476,7 +498,7 @@ static float AD_height = 150;//广告栏高度
 
 - (NSDictionary *)scrollBodyData
 {
-    return @{@"contentOffset": @{@"x": @(_collectionView.contentOffset.x), @"y": @(_collectionView.contentOffset.y)}};
+    return @{@"contentOffset": @{@"x": @(self.collectionView.contentOffset.x), @"y": @(self.collectionView.contentOffset.y)}};
 }
 
 
